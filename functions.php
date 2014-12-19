@@ -11,7 +11,9 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-require_once('./config.php');
+// require_once('./config.php');
+if (!is_file('./config.php'))
+  die("Can't find config.php");
 
 function data_to_json($url) {
     $json = file_get_contents($url);
@@ -117,7 +119,7 @@ function alert_hosts($host, $state, $ack, $notif) {
 		    default:
                 	$alert_json["$alert_count"]["current_state"] = "Unknown!";
 			break;
-		}		
+		}
                 $alert_json["$alert_count"]["plugin_output"] = $value["plugin_output"];
                 $alert_json["$alert_count"]["url"] = $extinfo_url . "?type=&host=" . str_replace(" ", "+", $value["host_name"]);
                 $alert_count += 1;
