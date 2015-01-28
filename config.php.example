@@ -17,10 +17,10 @@ error_reporting(-1);
 
 $title        = "Service Status Dashboard";
 $organization = "My Company";
-$main_url     = "https://monitoring.mycompany.org";
-$support_url  = "https://support.mycompany.org";
+$main_url     = "//" . $_SERVER['$HTTP_HOST'];
+$support_url  = $main_url . "/support";
+$json_url     = $main_url . "/nagios.status.json";
 $nagios_url   = $main_url . "/nagios/";
 $extinfo_url  = $main_url . "/nagios/cgi-bin/extinfo.cgi";
-$json_url     = "/tmp/nagios.status.json";
 
 ?>

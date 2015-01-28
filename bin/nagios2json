@@ -5,8 +5,9 @@
 SCRIPT="$BASH_SOURCE"
 SCRIPT_DIR="$(dirname "$BASH_SOURCE")"
 
+HTTPD_USER='apache'
 INPUT_FILE='/var/log/nagios/status.dat'
-OUTPUT_FILE='/tmp/nagios.status.json'
+OUTPUT_FILE="${SCRIPT_DIR}/../htdocs/nagios.status.json"
 
 PHP_SCRIPT="${SCRIPT_DIR}/../lib/json.php"
 
@@ -15,7 +16,8 @@ usage() {
   echo ""
   echo "Options:"
   echo "  -i INPUT_FILE   The status.dat file (Default: $INPUT_FILE)"
-  echo "  -i OUTPUT_FILE  The JSON result file (Default: $OUTPUT_FILE)"
+  echo "  -o OUTPUT_FILE  The JSON result file (Default: $OUTPUT_FILE)"
+  echo "  -u HTTPD_USER   The user account your httpd runs under (Default: $HTTPD_USER)"
   echo "  -h              Show this help screen"
   echo ""
 }
@@ -60,5 +62,6 @@ test -f "$PHP_SCRIPT" \
 
 # Do the necessary
 "$PHP" "$PHP_SCRIPT" "$INPUT_FILE" > "$OUTPUT_FILE"
+chown "$HTTPD_USER":"$HTTPD_USER" "$OUTPUT_FILE"
 
 script_exit 0
