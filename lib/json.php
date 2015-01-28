@@ -23,7 +23,15 @@
 // +----------------------------------------------------------------------+
 
 // Change this accordingly
-$statusFile = "/opt/local/var/nagios/status.dat";
+if (!empty($argv[1])) {
+  $statusFile = $argv[1];
+} else {
+  $statusFile = "/var/log/nagios/status.dat";
+}
+
+if (!is_file($statusFile)) {
+  die("Error: Can't open file: $statusFile\n");
+}
 
 //$nag_version = getFileVersion($statusFile); // returns integer 2 or 3
 $nag_version = 3;

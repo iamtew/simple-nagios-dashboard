@@ -19,8 +19,8 @@ $title        = "Service Status Dashboard";
 $organization = "My Company";
 $main_url     = "https://monitoring.mycompany.org";
 $support_url  = "https://support.mycompany.org";
-$json_url     = $main_url . "/nagios.json";
-$nagios_url   = $main_url . "/nagios3/";
-$extinfo_url  = $main_url . "/cgi-bin/nagios3/extinfo.cgi";
+$nagios_url   = $main_url . "/nagios/";
+$extinfo_url  = $main_url . "/nagios/cgi-bin/extinfo.cgi";
+$json_url     = "/tmp/nagios.status.json";
 
 ?>

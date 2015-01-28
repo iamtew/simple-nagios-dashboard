@@ -1,0 +1,64 @@
+#! /bin/bash
+#
+# Generate JSON structure from Nagios' status.dat
+
+SCRIPT="$BASH_SOURCE"
+SCRIPT_DIR="$(dirname "$BASH_SOURCE")"
+
+INPUT_FILE='/var/log/nagios/status.dat'
+OUTPUT_FILE='/tmp/nagios.status.json'
+
+PHP_SCRIPT="${SCRIPT_DIR}/../lib/json.php"
+
+usage() {
+  echo "Usage: ${SCRIPT} [-i <INPUT_FILE>] [-o <OUTPUT_FILE>]"
+  echo ""
+  echo "Options:"
+  echo "  -i INPUT_FILE   The status.dat file (Default: $INPUT_FILE)"
+  echo "  -i OUTPUT_FILE  The JSON result file (Default: $OUTPUT_FILE)"
+  echo "  -h              Show this help screen"
+  echo ""
+}
+
+script_exit() {
+  retval="$1"
+  message="${*:2}"
+  test ! -z "$message" \
+    && echo "$message"
+  exit "$retval"
+}
+
+
+# Main script
+while getopts ":i:o:h" opts
+do
+  case "$opts" in
+    i)
+      INPUT_FILE="$OPTARG"
+      ;;
+    o)
+      OUTPUT_FILE="$OPTARG"
+      ;;
+    h)
+      usage
+      script_exit 0
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+# Pre-flight checklist :-)
+PHP=$(which php 2> /dev/null)
+test $? == 0 \
+  || script_exit 1 "Error: Can't find php executable. Is php-cli installed?"
+
+test -f "$INPUT_FILE" \
+  || script_exit 1 "Error: Can't find file: $INPUT_FILE"
+
+test -f "$PHP_SCRIPT" \
+  || script_exit 1 "Error: Can't find file: $PHP_SCRIPT"
+
+# Do the necessary
+"$PHP" "$PHP_SCRIPT" "$INPUT_FILE" > "$OUTPUT_FILE"
+
+script_exit 0
