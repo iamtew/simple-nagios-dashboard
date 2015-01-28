@@ -11,7 +11,8 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-require_once("./functions.php");
+$functions_file = dirname(__FILE__) . '/../lib/functions.php';
+require_once($functions_file);
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ require_once("./functions.php");
         a {
             color: #333 !important;
         }
-        .alert { 
+        .alert {
             padding:5px 13px !important;
             border-radius: 0px !important;
             margin-bottom: 2px !important;
@@ -55,7 +56,7 @@ require_once("./functions.php");
                 }
                 if ($host_issue_count > 0) {
                  print($host_issue_count . " Hosts Down!");
-             } 
+             }
              print("<h2></div>");
          } elseif(($warnings_count) > 0) {
             print(($warnings_count));

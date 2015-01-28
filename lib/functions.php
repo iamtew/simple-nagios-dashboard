@@ -11,9 +11,12 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-// require_once('./config.php');
-if (!is_file('./config.php'))
-  die("Can't find config.php");
+$config_file = dirname(__FILE__) . '/../config.php';
+
+if (!is_file($config_file))
+  die("Can't find configuration: $config_file");
+
+require_once($config_file);
 
 function data_to_json($url) {
     $json = file_get_contents($url);
