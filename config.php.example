@@ -17,7 +17,7 @@ error_reporting(-1);
 
 $title        = "Service Status Dashboard";
 $organization = "My Company";
-$main_url     = "//" . $_SERVER['$HTTP_HOST'];
+$main_url     = "//" . $_SERVER['HTTP_HOST'];
 $support_url  = $main_url . "/support";
 $json_url     = $main_url . "/nagios.status.json";
 $nagios_url   = $main_url . "/nagios/";
