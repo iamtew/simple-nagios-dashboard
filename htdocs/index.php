@@ -24,9 +24,6 @@ require_once($functions_file);
     <meta http-equiv="refresh" content="30">
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/superhero/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        a {
-            color: #333 !important;
-        }
         .alert {
             padding:5px 13px !important;
             border-radius: 0px !important;
